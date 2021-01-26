@@ -11,10 +11,19 @@ class Information extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            username:'',
+            mail:'',
+            password:'',
+            repassword:'',
         };
     }
 
     render() {
+        console.log("Name : " + this.state.username);
+        console.log("Email : " + this.state.mail);
+        console.log("Password : " + this.state.password);
+        console.log("Re-Password : " + this.state.repassword);
+
         return (
             <View style={{ flex: 1 }} >
                 <Header title="Profile" onPress={() => this.props.navigation.navigate('home')} />
@@ -29,7 +38,7 @@ class Information extends Component {
                         />
                         <InputBox
                             placeholder="Secondary Email"
-                            onChangeText={text => this.setState({ username: text })}
+                            onChangeText={text => this.setState({ mail: text })}
 
                         />
                         <Button 
@@ -43,13 +52,15 @@ class Information extends Component {
                     <View style={{ marginTop: hp(0), height: hp(40), justifyContent: 'space-evenly', marginBottom: hp(1) }} >
                         
                         <InputBox
+                            secureTextEntry
                             placeholder="Password"
-                            onChangeText={text => this.setState({ username: text })}
+                            onChangeText={text => this.setState({ password: text })}
 
                         />
                         <InputBox
+                            secureTextEntry
                             placeholder="Re-Enter Password"
-                            onChangeText={text => this.setState({ username: text })}
+                            onChangeText={text => this.setState({ repassword: text })}
 
                         />
                         <Button

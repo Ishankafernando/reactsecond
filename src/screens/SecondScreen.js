@@ -15,6 +15,9 @@ class SecondScreen extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            modulecode: '',
+            selectexam: '',
+            selectdate:'',
 
             modalVisible: false,
             examName: "Select Your Exam",
@@ -33,7 +36,9 @@ class SecondScreen extends Component {
                 visible={this.state.modalVisible}
 
             >
-                <View style={styles.centeredView}>
+                <View
+                    onChangeText={this.props.onChangeText}
+                    style={styles.centeredView}>
                     <TouchableWithoutFeedback onPress={() => this.setState({ modalVisible: false })} >
                         <View style={styles.modalView}>
                             <FlatList
@@ -41,7 +46,9 @@ class SecondScreen extends Component {
                                 keyExtractor={item => item.examName}
                                 renderItem={({ item }) => (
                                     <TouchableWithoutFeedback onPress={() => this.setState({ examName: item.examName, modalVisible: false })}  >
-                                        <Text style={styles.selectSize}>{item.examName}</Text>
+                                        <Text
+                                            onChangeText={text => this.setState({ Selectexam: text })}
+                                            style={styles.selectSize}>{item.examName}</Text>
                                     </TouchableWithoutFeedback>
 
                                 )}
@@ -92,6 +99,10 @@ class SecondScreen extends Component {
         }
     }
     render() {
+        console.log("Module code : " + this.state.modulecode);
+        console.log("Select Exam : " + this.state.selectexam);
+        console.log("Select Date : " + this.state.selectdate);
+
         return (
             <View>
                 <Header title="Book Exam" onPress={() => this.props.navigation.navigate('home')} />
@@ -102,13 +113,15 @@ class SecondScreen extends Component {
                             onChangeText={text => this.setState({ modulecode: text })}
                         />
                         <SelectButton
+                            onChangeText={text => this.setState({selectexam:text})}
                             color={this.changeColor()}
                             buttonText={this.state.examName}
                             onPress={() => this.setState({ modalVisible: true })}
                         />
                     </View>
-                    <View style={{paddingBottom:hp(10)}}>
+                    <View style={{ paddingBottom: hp(10) }}>
                         <SelectButton
+                            onChangeText={text => this.setState({selectdate:text})}
                             color={this.changeColorDate()}
                             buttonText={this.state.chosenData}
                             onPress={this.showPicker}

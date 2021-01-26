@@ -10,42 +10,44 @@ class SelectButton extends Component {
     };
   }
 
-  
+
 
   render() {
+    
     return (
-        <TouchableOpacity style={styles.mainContainerStyle} onPress={this.props.onPress} >
-        <Text 
-        style={{
-            color:this.props.color,
-            fontSize:hp(2)
-        }} >{this.props.buttonText}
+      <TouchableOpacity style={styles.mainContainerStyle} onPress={this.props.onPress}  >
+        <Text
+        onChangeText={this.props.onChangeText}
+          style={{
+            color: this.props.color,
+            fontSize: hp(2)
+          }} >{this.props.buttonText}
         </Text>
         <Image style={styles.imageStyle} source={require('../../assets/downarrow.png')} />
-    </TouchableOpacity>
+      </TouchableOpacity>
     );
   }
 }
 
 const styles = StyleSheet.create({
-    mainContainerStyle: {
-        flexDirection:"row",
-        height: hp(7),
-        width: wp(90),
-        borderColor: '#0A829A',
-        borderWidth:1,
-        borderRadius: 20,
-        alignSelf: 'center',
-        paddingHorizontal:wp(5),
-        justifyContent: 'space-between',
-        alignItems:'center'
-        
-    },
-    imageStyle: {
-      height: hp(3),
-      width: hp(3),
-      marginLeft:wp(0),
-      marginTop:hp(.5),
+  mainContainerStyle: {
+    flexDirection: "row",
+    height: hp(7),
+    width: wp(90),
+    borderColor: '#0A829A',
+    borderWidth: 1,
+    borderRadius: 20,
+    alignSelf: 'center',
+    paddingHorizontal: wp(5),
+    justifyContent: 'space-between',
+    alignItems: 'center'
+
+  },
+  imageStyle: {
+    height: hp(3),
+    width: hp(3),
+    marginLeft: wp(0),
+    marginTop: hp(.5),
   }
 });
 

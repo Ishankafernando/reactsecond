@@ -16,6 +16,10 @@ class Attendance extends Component {
     constructor(props) {
         super(props)
         this.state = {
+            selectedModule: '',
+            starttime: '',
+            endtime: '',
+            modules: '',
 
             isVisible: false,
             isVisible2: false,
@@ -71,28 +75,48 @@ class Attendance extends Component {
     }
 
     render() {
+        console.log("Start Time : " + this.state.starttime);
+        console.log("End Time : " + this.state.endtime);
+        console.log("Modules : " + this.state.modules);
+
         let { container, itemText } = styles
         return (
             <View style={{ flex: 1 }} >
                 <Header title="Attendance" onPress={() => this.props.navigation.navigate('home')} />
                 <View>
                     <View >
-                        <Text style={styles.labelStyle}>Modules</Text>
+                        <Text
+                            onChangeText={this.props.onChangeText}
+                            style={styles.labelStyle}>Modules</Text>
                     </View>
                     <View style={container}>
                         <FlatList
+
                             data={dataList}
+                            onChangeText={text => this.setState({ modules: text })}
                             renderItem={this._renderItem}
                             keyExtractor={item => item.key}
                             numColumns={3}
                             scrollEnabled={false}
                             renderItem={({ item }) => (
-                                <TouchableOpacity style={styles.itemStyle}>
-                                    <Text>
-                                        {item.key}
+                                <TouchableOpacity style={{
+                                    backgroundColor: this.state.selectedModule === item.key ? "#0A829A" : '#CAE5EA',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    height: hp(7),
+                                    flex: 1,
+                                    margin: hp(2),
+                                    borderColor: '#0A829A',
+                                    borderWidth: 1.5,
+                                    borderRadius: 20,
+                                }} onPress={() => this.setState({ selectedModule: item.key })}  onChangeText={text => this.setState({modules:text})} >
+                                    <Text style={{
+                                        fontSize: hp(1.5),
+                                        color: this.state.selectedModule === item.key ? '#fff' : "#000",
+                                    }} >{item.key}
                                     </Text>
-
                                 </TouchableOpacity>
+
                             )}
 
                         />
@@ -100,6 +124,7 @@ class Attendance extends Component {
 
                     <View style={{ paddingTop: hp(4) }}>
                         <SelectButton
+                            onChangeText={text => this.setState({ starttime: text })}
                             color={this.changeColorDate()}
                             buttonText={this.state.chosenData}
                             onPress={() => this.setState({ isVisible: true })}
@@ -123,6 +148,7 @@ class Attendance extends Component {
 
                     <View style={{ paddingTop: hp(4), paddingBottom: hp(3) }}>
                         <SelectButton
+                            onChangeText={text => this.setState({ endtime: text })}
                             color={this.changeColorDate()}
                             buttonText={this.state.chosenData2}
                             onPress={() => this.setState({ isVisible2: true })}
@@ -167,21 +193,21 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#fff',
     },
-    itemStyle: {
-        backgroundColor: '#CAE5EA',
-        alignItems: 'center',
-        justifyContent: 'center',
-        height: hp(7),
-        flex: 1,
-        margin: hp(2),
-        borderColor: '#0A829A',
-        borderWidth: 1.5,
-        borderRadius: 20,
-    },
-    itemText: {
-        color: '#000000',
-        fontSize: hp(1.5)
-    }
+    // itemStyle: {
+    //     backgroundColor: this.state.selectedModule === item.key ? "#0A829A" : '#CAE5EA',
+    //     alignItems: 'center',
+    //     justifyContent: 'center',
+    //     height: hp(7),
+    //     flex: 1,
+    //     margin: hp(2),
+    //     borderColor: '#0A829A',
+    //     borderWidth: 1.5,
+    //     borderRadius: 20,
+    // },
+    // itemText: {
+    //     color: '#000000',
+    //     fontSize: hp(1.5)
+    // }
 
 });
 
