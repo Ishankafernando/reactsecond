@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 
@@ -21,7 +21,7 @@ class SelectButton extends Component {
             fontSize:hp(2)
         }} >{this.props.buttonText}
         </Text>
-        <Text>V</Text>
+        <Image style={styles.imageStyle} source={require('../../assets/downarrow.png')} />
     </TouchableOpacity>
     );
   }
@@ -40,7 +40,13 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         alignItems:'center'
         
-    }
+    },
+    imageStyle: {
+      height: hp(3),
+      width: hp(3),
+      marginLeft:wp(0),
+      marginTop:hp(.5),
+  }
 });
 
 export default SelectButton;

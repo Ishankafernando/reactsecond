@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text,StyleSheet } from 'react-native';
 
 
 import FirstScreen from '../screens/FirstScreen';
 import SecondScreen from '../screens/SecondScreen';
 import LoginPage from '../screens/LoginPage';
 import Attendance from '../screens/Attendance';
+
 
 
 import { NavigationContainer } from '@react-navigation/native';
@@ -25,11 +26,11 @@ class Navigation extends Component {
                         cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS
                     }}
                 >
-                    {/* {<Stack.Screen name="first" component={LoginPage} />} */}
-                    {/* <Stack.Screen name="second" component={FirstScreen} /> */}
-                    {/* <Stack.Screen name="third" component={SecondScreen} /> */}
-                    {/* <Stack.Screen name="forth" component={Information} /> */}
-                    <Stack.Screen name="fifth" component={Attendance} />
+                    <Stack.Screen name="login" component={LoginPage} />
+                    <Stack.Screen name="home" component={FirstScreen} />
+                    <Stack.Screen name="exam" component={SecondScreen} />
+                    <Stack.Screen name="profile" component={Information} />
+                    <Stack.Screen name="modules" component={Attendance} />
 
 
                 </Stack.Navigator>

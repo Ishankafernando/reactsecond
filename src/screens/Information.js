@@ -17,43 +17,44 @@ class Information extends Component {
     render() {
         return (
             <View style={{ flex: 1 }} >
-                <Header title="Profile" onPress={() => alert("Hello")} />
+                <Header title="Profile" onPress={() => this.props.navigation.navigate('home')} />
 
                 <View style={styles.mainContiner} >
-                    {/* <Label labelName='Student Information' /> */}
-                    <View style={{ marginTop: hp(2), height: hp(30), justifyContent: 'space-around', marginBottom: hp(0) }} >
+                    <Text style={styles.labelStyle}>Student Information</Text>
+                    <View style={{ marginTop: hp(0), height: hp(40), justifyContent: 'space-evenly', marginBottom: hp(0) }} >
                         <InputBox
-                            placeholder="Username"
+                            placeholder="Name"
                             onChangeText={text => this.setState({ username: text })}
 
                         />
                         <InputBox
-                            placeholder="Username"
+                            placeholder="Secondary Email"
                             onChangeText={text => this.setState({ username: text })}
 
                         />
-                        <Button
+                        <Button 
                             buttonText="Update Profile"
-                            onPress={() => this.props.navigation.navigate('second')}
+                            onPress={() => alert("Profile Updated")}
                         />
 
                     </View>
-                    {/* <Label labelName='Change Password' /> */}
-                    <View style={{ marginTop: hp(0), height: hp(30), justifyContent: 'space-around', marginBottom: hp(1) }} >
+                    <Text style={styles.labelStyle}>Change Password</Text>
+
+                    <View style={{ marginTop: hp(0), height: hp(40), justifyContent: 'space-evenly', marginBottom: hp(1) }} >
                         
                         <InputBox
-                            placeholder="Username"
+                            placeholder="Password"
                             onChangeText={text => this.setState({ username: text })}
 
                         />
                         <InputBox
-                            placeholder="Username"
+                            placeholder="Re-Enter Password"
                             onChangeText={text => this.setState({ username: text })}
 
                         />
                         <Button
                             buttonText="Update Profile"
-                            onPress={() => this.props.navigation.navigate('second')}
+                            onPress={() => alert("Password Updated")}
                         />
 
                     </View>
@@ -68,7 +69,14 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#fff',
         justifyContent: 'space-around'
-    }
+    },
+    labelStyle: {
+        marginTop: hp(2),
+        alignSelf: 'center',
+        fontSize: hp(3),
+        fontWeight: "bold"
+        
+    },
 });
 
 export default Information;

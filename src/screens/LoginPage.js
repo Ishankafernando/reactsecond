@@ -27,7 +27,7 @@ class LoginPage extends Component {
                 <ScrollView>
                     <Text style={styles.labelStyle}>Login Page</Text>
 
-                    <View style={{ height: hp(30), justifyContent: 'space-around', marginBottom: hp(1) }} >
+                    <View style={{ height: hp(30), justifyContent: 'space-around', marginBottom: hp(0) }} >
                         <InputBox
                             placeholder="Username"
                             onChangeText={text => this.setState({ username: text })}
@@ -42,7 +42,7 @@ class LoginPage extends Component {
                     <View style={{ paddingVertical: hp(5) }}>
                         <Button
                             buttonText="Login"
-                            onPress={() => this.props.navigation.navigate('second')}
+                            onPress={() => this.props.navigation.navigate('home')}
                         />
                     </View>
                     <Text style={styles.label2Style}>Not a member yet?</Text>
@@ -50,7 +50,7 @@ class LoginPage extends Component {
 
                     <SignupButton
                         signupText="Signup"
-                        onPress={() => this.props.navigation.navigate('first')}
+                        onPress={()=> alert("Signup Page")}
                     />
                 </ScrollView>
             </View>

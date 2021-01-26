@@ -1,50 +1,47 @@
 import React, { Component } from 'react';
-import { View, Text, FlatList, TouchableOpacity, StyleSheet,ScrollView } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 
 import Header from '../components/Header'
 import Button from '../common/Button'
-import InputBox from '../common/InputBox'
 import HomeItem from '../components/HomeItem';
 
 class FirstScreen extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            username: '',
-            password: '',
+            
         };
     }
 
 
     render() {
-        console.log("NAME : " + this.state.username);
-        console.log("Password : " + this.state.password);
+        
         return (
             <View style={{flex:1}} >
-                <Header title="Home" onPress={() => alert("Hello")} logoutButtonState />
+                <Header title="Home" onPress={() => this.props.navigation.navigate('login')} logoutButtonState />
 
                 <View style={styles.mainContiner} >
                 
-                    <View style={{ flexDirection: "row", justifyContent: 'space-around', marginTop:hp(5) }} >
+                    <View style={{ flexDirection: "row", justifyContent: 'space-around', marginTop:hp(10) }} >
                         <HomeItem
                             buttonTitle="Book Exam"
                             source={require('../../assets/exam.png')}
-                            onPress={() => alert("Book Exam")}
+                            onPress={() => this.props.navigation.navigate('exam') }
                         />
                         <HomeItem 
                             buttonTitle="Attendance"
                             imageHeight ={hp(8)}
                             source={require('../../assets/attendence.png')}
-                            onPress={() => alert("Attendance")}
+                            onPress={() => this.props.navigation.navigate('modules')}
                         />
                     </View>
-                    <View style={{ alignSelf: "center", marginBottom:hp(20) }} >
+                    <View style={{ alignSelf: "center", marginTop:hp(13)}} >
                         <HomeItem
                             buttonTitle="Profile"
                             source={require('../../assets/profile.png')}
-                            onPress={() => alert("Profile")}
+                            onPress={() => this.props.navigation.navigate('profile')}
                         />
                     </View>
                 </View>

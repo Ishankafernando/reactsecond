@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Modal, TouchableWithoutFeedback, FlatList, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, Modal, TouchableWithoutFeedback, FlatList, TouchableOpacity, Container } from 'react-native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import DateTimePickerModal from "react-native-modal-datetime-picker";
+import moment from 'moment';
 
 
 import examData from '../data/ExamItems.json'
-
 import Header from '../components/Header'
 import Button from '../common/Button'
 import InputBox from '../common/InputBox'
@@ -14,13 +15,15 @@ class SecondScreen extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            modulecode: '',
-            selectexam: '',
-            selectdate: '',
+
             modalVisible: false,
-            examName: "SELECT YOUR EXAM"
+            examName: "Select Your Exam",
+            isVisible: false,
+            chosenData: 'Select Date',
         };
+
     }
+
 
     renderPickerModal() {
         return (
@@ -52,7 +55,7 @@ class SecondScreen extends Component {
 
 
     changeColor() {
-        if (this.state.examName === "SELECT YOUR EXAM") {
+        if (this.state.examName === "Select Your Exam") {
             return "#a2a2a2"
         }
         else {
@@ -60,13 +63,40 @@ class SecondScreen extends Component {
         }
     }
 
+    handlePicker = (datetime) => {
+        this.setState({
+            isVisible: false,
+            chosenData: moment(datetime).format('MMMM,Do YYYY')
+        })
+    }
 
+    hidePicker = () => {
+        this.setState({
+            isVisible: false,
+
+        })
+    }
+
+    showPicker = () => {
+        this.setState({
+            isVisible: true
+        })
+    }
+
+    changeColorDate() {
+        if (this.state.chosenData === "Select Date") {
+            return "#a2a2a2"
+        }
+        else {
+            return "#000"
+        }
+    }
     render() {
         return (
             <View>
-                <Header title="Book Exam" onPress={() => alert("Hello")} />
+                <Header title="Book Exam" onPress={() => this.props.navigation.navigate('home')} />
                 <View style={styles.mainContainer}>
-                    <View style={{ marginTop: hp(1), height: hp(20), justifyContent: 'space-around', marginBottom: hp(1) }} >
+                    <View style={{ marginTop: hp(3), height: hp(25), justifyContent: 'space-around', marginBottom: hp(3) }} >
                         <InputBox
                             placeholder="Module Code"
                             onChangeText={text => this.setState({ modulecode: text })}
@@ -77,15 +107,35 @@ class SecondScreen extends Component {
                             onPress={() => this.setState({ modalVisible: true })}
                         />
                     </View>
+                    <View style={{paddingBottom:hp(10)}}>
+                        <SelectButton
+                            color={this.changeColorDate()}
+                            buttonText={this.state.chosenData}
+                            onPress={this.showPicker}
+                        />
 
+                        <DateTimePickerModal
+                            headerTextIOS={'Select Date'}
+                            isVisible={this.state.isVisible}
+                            onConfirm={this.handlePicker}
+                            onCancel={this.hidePicker}
+                            mode={'date'}
+                            is24Hour={false}
+
+                        />
+                    </View>
                     <Button
                         buttonText="Book"
-                        onPress={() => this.props.navigation.navigate('first')}
+                        onPress={() => alert("Booked Exam Date.")}
                     />
                     {this.renderPickerModal()}
                 </View>
 
+
+
             </View>
+
+
         );
     }
 }
@@ -116,6 +166,7 @@ const styles = StyleSheet.create({
         shadowRadius: 3.84,
         elevation: 5
     },
+
 
 });
 
